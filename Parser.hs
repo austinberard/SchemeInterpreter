@@ -16,7 +16,10 @@ spaces :: Parser ()
 spaces = skipMany1 space
 
 parseNumber :: Parser LispVal
-parseNumber = liftM (Number . read) $ many1 digit
+parseNumber = do
+                x <- many1 digit
+                return $ Number $ read x
+
 
 parseAtom :: Parser LispVal
 parseAtom = do
